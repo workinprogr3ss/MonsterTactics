@@ -1,0 +1,1 @@
+{ "id": "emberon", "type": "Fire", "role": "Striker", "base": {"hp": 100, "atk": 20, "def": 8, "spd": 12}, "ult": "flame_dash" }

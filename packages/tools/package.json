@@ -1,0 +1,9 @@
+{
+  "name": "@monstertactics/tools",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "mt-validate": "src/validate.mjs"
+  }
+}

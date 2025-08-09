@@ -1,0 +1,4 @@
+name: "Lighthouse Keeper"
+persona: |
+  Taciturn but kind; keeps vigil over tides and storms. Offers contracts.
+allowed_actions: [offer_contract, reveal_node]

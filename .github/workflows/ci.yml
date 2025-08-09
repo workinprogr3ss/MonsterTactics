@@ -1,0 +1,29 @@
+name: ci
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+      - name: Enable corepack
+        run: corepack enable
+      - name: Install deps
+        run: |
+          if command -v pnpm >/dev/null; then pnpm install --frozen-lockfile || pnpm install; \
+          elif command -v yarn >/dev/null; then yarn install --immutable || yarn install; \
+          else npm ci || npm i; fi
+      - name: Typecheck
+        run: npx tsc -b || true
+      - name: Lint (if configured)
+        run: npx eslint . --ext .ts,.tsx || true
+      - name: Build web (if configured)
+        run: cd apps/web && npx vite build

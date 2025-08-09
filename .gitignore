@@ -1,0 +1,21 @@
+# Node
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+.vite/
+*.log
+
+# Editor/OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Env
+.env*
+
+# Artifacts
+*.coverage
+replays/

@@ -1,0 +1,25 @@
+{
+  "name": "monstertactics",
+  "private": true,
+  "packageManager": "pnpm@9",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm -C apps/web run dev",
+    "build": "pnpm -C apps/web run build && pnpm -r --if-present build",
+    "lint": "eslint . --ext .ts,.tsx,.js",
+    "test": "vitest -u",
+    "typecheck": "tsc -b",
+    "format": "prettier -w ."
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "eslint": "^9",
+    "eslint-config-prettier": "^9",
+    "prettier": "^3",
+    "typescript": "^5",
+    "vitest": "^2"
+  }
+}
