@@ -1,11 +1,7 @@
 {
   "name": "monstertactics",
   "private": true,
-  "packageManager": "pnpm@9",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "packageManager": "pnpm@10.14.0",
   "scripts": {
     "dev": "pnpm -C apps/web run dev",
     "build": "pnpm -C apps/web run build && pnpm -r --if-present build",

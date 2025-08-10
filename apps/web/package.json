@@ -12,7 +12,9 @@
     "pixi.js": "^8",
     "react": "^18",
     "react-dom": "^18",
-    "zustand": "^4"
+    "zustand": "^4",
+    "@monstertactics/ui": "workspace:*",
+    "@monstertactics/sim": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^18",

@@ -1,1 +1,1 @@
-export const Placeholder = () => null
+export { GameWindow } from './GameWindow'

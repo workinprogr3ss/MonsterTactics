@@ -3,5 +3,24 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "main": "src/index.tsx"
+  "main": "src/index.tsx",
+  "types": "src/index.tsx",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@monstertactics/sim": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "pixi.js": "^8.1.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5",
+    "pixi.js": "^8.1.5"
+  }
 }
