@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { Application, Container, Graphics } from 'pixi.js'
-import type { World } from '@monstertactics/sim'
-import { makeWorld, step } from '@monstertactics/sim'
+import type { DemoWorld } from '@monstertactics/sim'
+import { makeDemoWorld, stepDemoWorld } from '@monstertactics/sim'
 import { axialToPixel } from './hex'
 
 export interface GameWindowProps {
@@ -27,7 +27,7 @@ const ensureRootStyles = () => {
 export const GameWindow: React.FC<GameWindowProps> = ({ hexSize = 32, showGrid = true, background = 0x0b1020 }) => {
   const hostRef = useRef<HTMLDivElement | null>(null)
   const appRef = useRef<Application | null>(null)
-  const worldRef = useRef<World | null>(null)
+  const worldRef = useRef<DemoWorld | null>(null)
   const unitGfxRef = useRef<Graphics | null>(null)
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export const GameWindow: React.FC<GameWindowProps> = ({ hexSize = 32, showGrid =
 
       // World bootstrap using current size
       const bounds = { width: app.renderer.width, height: app.renderer.height }
-      const world = makeWorld(bounds)
+      const world = makeDemoWorld(bounds)
       worldRef.current = world
 
       // Stage containers
@@ -72,7 +72,7 @@ export const GameWindow: React.FC<GameWindowProps> = ({ hexSize = 32, showGrid =
       app.ticker.add((ticker) => {
         const dt = ticker.deltaMS / 1000 // seconds
         if (!worldRef.current) return
-        step(worldRef.current, dt)
+        stepDemoWorld(worldRef.current, dt)
         const main = worldRef.current.units[0]
         if (main && unitGfxRef.current) {
           unitGfxRef.current.position.set(main.pos.x, main.pos.y)

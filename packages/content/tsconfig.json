@@ -2,14 +2,16 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
-    "jsx": "react-jsx",
-    "noEmit": false,
+    "rootDir": ".",
     "composite": true,
-    "declaration": true
+    "declaration": true,
+    "noEmit": false,
+    "paths": {
+      "@monstertactics/sim": ["../sim/src/index.ts"]
+    }
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"],
+  "exclude": ["dist", "node_modules"],
   "references": [
     { "path": "../sim" }
   ]

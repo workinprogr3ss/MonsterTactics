@@ -1,4 +1,18 @@
 {
   "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+    "paths": {
+      "@monstertactics/content": ["../../packages/content/src/index.ts"],
+      "@monstertactics/sim": ["../../packages/sim/src/index.ts"],
+      "@monstertactics/ui": ["../../packages/ui/src/index.tsx"]
+    }
+  },
+  "references": [
+    { "path": "../../packages/sim" },
+    { "path": "../../packages/content" },
+    { "path": "../../packages/ui" }
+  ],
   "include": ["src"]
 }
