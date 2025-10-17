@@ -1,57 +1,83 @@
-// Headless demo world + step function (deterministic, UI-agnostic)
-export type Vec2 = { x: number; y: number }
+export * from "./types"
+export {
+  HEX_DIRECTIONS,
+  DEFAULT_HEX_SIZE,
+  addAxial,
+  neighbors,
+  hexDistance,
+  axialToPixel,
+  hexPolygonPoints,
+  makeBoard,
+  withinBoard,
+  axialKey,
+  equalAxial,
+  bounds,
+} from "./board"
+export {
+  DEFAULT_SYNERGY_THRESHOLDS,
+  createSynergyCounts,
+  tallySynergies,
+  computeSynergies,
+  effective,
+} from "./synergies"
+export { step } from "./combat"
 
-export interface Unit {
+// Legacy physics demo exports (used by Pixi prototype)
+export type DemoVec2 = { x: number; y: number }
+
+export interface DemoUnit {
   id: string
-  pos: Vec2
-  vel: Vec2
+  pos: DemoVec2
+  vel: DemoVec2
   radius: number
 }
 
-export interface Bounds { width: number; height: number }
-
-export interface World {
-  t: number // seconds
-  units: Unit[]
-  bounds: Bounds
+export interface DemoBounds {
+  width: number
+  height: number
 }
 
-export function makeWorld(bounds: Bounds): World {
+export interface DemoWorld {
+  t: number
+  units: DemoUnit[]
+  bounds: DemoBounds
+}
+
+export function makeDemoWorld(bounds: DemoBounds): DemoWorld {
   return {
     t: 0,
     bounds,
     units: [
       {
-        id: 'emberon',
+        id: "emberon",
         pos: { x: bounds.width / 2, y: bounds.height / 2 },
-        vel: { x: 80, y: 55 }, // px/sec
+        vel: { x: 80, y: 55 },
         radius: 16,
       },
     ],
   }
 }
 
-export function step(world: World, dt: number): void {
-  // Integrate simple physics and bounce off edges
-  for (const u of world.units) {
-    u.pos.x += u.vel.x * dt
-    u.pos.y += u.vel.y * dt
+export function stepDemoWorld(world: DemoWorld, dt: number): void {
+  for (const unit of world.units) {
+    unit.pos.x += unit.vel.x * dt
+    unit.pos.y += unit.vel.y * dt
 
-    const r = u.radius
-    if (u.pos.x < r) {
-      u.pos.x = r
-      u.vel.x *= -1
-    } else if (u.pos.x > world.bounds.width - r) {
-      u.pos.x = world.bounds.width - r
-      u.vel.x *= -1
+    const r = unit.radius
+    if (unit.pos.x < r) {
+      unit.pos.x = r
+      unit.vel.x *= -1
+    } else if (unit.pos.x > world.bounds.width - r) {
+      unit.pos.x = world.bounds.width - r
+      unit.vel.x *= -1
     }
 
-    if (u.pos.y < r) {
-      u.pos.y = r
-      u.vel.y *= -1
-    } else if (u.pos.y > world.bounds.height - r) {
-      u.pos.y = world.bounds.height - r
-      u.vel.y *= -1
+    if (unit.pos.y < r) {
+      unit.pos.y = r
+      unit.vel.y *= -1
+    } else if (unit.pos.y > world.bounds.height - r) {
+      unit.pos.y = world.bounds.height - r
+      unit.vel.y *= -1
     }
   }
   world.t += dt
